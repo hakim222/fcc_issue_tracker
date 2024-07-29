@@ -1,5 +1,5 @@
 'use strict';
-
+const dbConnect = require('./dbConnect.js')
 const express     = require('express');
 const bodyParser  = require('body-parser');
 const expect      = require('chai').expect;
@@ -10,13 +10,15 @@ const apiRoutes         = require('./routes/api.js');
 const fccTestingRoutes  = require('./routes/fcctesting.js');
 const runner            = require('./test-runner');
 
+
+//DB connection
+dbConnect();
+
 let app = express();
 
 app.use('/public', express.static(process.cwd() + '/public'));
 
 app.use(cors({origin: '*'})); //For FCC testing purposes only
-
-
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
